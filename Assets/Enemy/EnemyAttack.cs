@@ -12,6 +12,11 @@ public class EnemyAttack : MonoBehaviour
         StartCoroutine(LaunchProjectile());
     }
 
+    public void StopAttack()
+    {
+        StopAllCoroutines();
+    }
+
     public void SetDirection(Vector3 dir)
     {
         direction = dir;

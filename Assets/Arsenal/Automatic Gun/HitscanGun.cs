@@ -13,7 +13,7 @@ public class HitscanGun : Gun
     [SerializeField] private float spread = 20;
     
     
-    
+    private int layerMask = ~(1 << 3);
 
 
     protected override void Shoot()
@@ -32,7 +32,7 @@ public class HitscanGun : Gun
 
         Knockback(-direction);
 
-        if (Physics.Raycast(cameraPivot.position, direction, out RaycastHit hit, range, ~0, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(cameraPivot.position, direction, out RaycastHit hit, range, layerMask, QueryTriggerInteraction.Ignore))
         {
             target = hit.point;
             distance = hit.distance;
@@ -46,8 +46,7 @@ public class HitscanGun : Gun
                 hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
             }
         }
-        GameObject particles = Instantiate(muzzleFlashPrefab, gunTip.position, transform.rotation);
-        Destroy(particles, 0.5f);
+        SpawnMuzzleFlash();
         StartCoroutine(SpawnBulletTrail(target));
     }
 
@@ -56,6 +55,12 @@ public class HitscanGun : Gun
     private void Knockback(Vector3 dir)
     {
         player.GetComponent<PlayerMovement>().append_vel(dir * knockbackForce);
+    }
+
+    private void SpawnMuzzleFlash()
+    {
+        GameObject particles = Instantiate(muzzleFlashPrefab, gunTip.position, transform.rotation);
+        Destroy(particles, 0.5f);
     }
 
     IEnumerator SpawnBulletTrail(Vector3 target)

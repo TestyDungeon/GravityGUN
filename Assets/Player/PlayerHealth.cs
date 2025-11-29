@@ -18,7 +18,7 @@ public class PlayerHealth : Health
         
     }
 
-    override protected void OnDeath()
+    override protected void Death()
     {
         isAlive = false;
         Debug.Log("Player " + name + " died.");

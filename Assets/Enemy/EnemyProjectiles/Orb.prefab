@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileStart: {fileID: 0}
   projectileSpeed: 20
-  damage: 20
+  damage: 7
   knockback: 15
 --- !u!114 &-1691998244720001938
 MonoBehaviour:

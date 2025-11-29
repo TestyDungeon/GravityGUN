@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +7,7 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyIdleState IdleState = new EnemyIdleState();
     public EnemyChaseState ChaseState = new EnemyChaseState();
     public EnemyFightState FightState = new EnemyFightState();
+    public EnemyDeadState DeadState = new EnemyDeadState();
     [HideInInspector] public MovementController movementController;
 
     public float chaseSpeed = 7;
@@ -29,27 +29,33 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Vector3 enemyVelocity = Vector3.zero;
     [HideInInspector] public Vector3 enemyExternalVelocity = Vector3.zero;
 
-    private AINavigation aiNavigation;
+    private Rigidbody[] rigidbodies;
+    private Collider[] colliders;
 
-    private NavMeshPath path;
+    private Health enemyHealth;
 
     void Awake()
     {
+        enemyHealth = GetComponent<Health>();
         animator = GetComponentInChildren<Animator>();
-        aiNavigation = new AINavigation();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyAttack = GetComponent<EnemyAttack>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         sight = GetComponentInChildren<SphereCollider>().radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
         movementController = GetComponent<MovementController>();
         
-        currentState = ChaseState;
+        currentState = IdleState;
         currentState.EnterState(this);
     }
 
     void Start()
     {
+        rigidbodies = GetComponentsInChildren<Rigidbody>();
+        colliders = GetComponentsInChildren<Collider>();
         gravity = movementController.getGravity();
+
+        SetRagdollColliders(false);
+        SetRagdollRigidBody(false);
     }
 
     // Update is called once per frame
@@ -205,4 +211,39 @@ public class EnemyStateManager : MonoBehaviour
         idleDir = Vector3.ProjectOnPlane(idleDir, transform.up).normalized;
     }
     
+    public void SetRagdollRigidBody(bool state)
+    {
+        foreach(Rigidbody rb in rigidbodies)
+        {
+            rb.isKinematic = !state;
+        }
+        
+    }
+
+    public void SetRagdollColliders(bool state)
+    {
+        foreach(Collider col in colliders)
+        {
+            col.enabled = state;
+        }
+        capsuleCollider.enabled = !state;
+    }
+
+    void OnEnable()
+    {
+        if (enemyHealth != null)
+            enemyHealth.OnDeath += OnDeath;
+    }
+
+    void OnDisable()
+    {
+        if (enemyHealth != null)
+            enemyHealth.OnDeath -= OnDeath;
+    }
+
+    private void OnDeath()
+    {
+        SwitchState(DeadState);
+        Debug.Log("DIED!!!!!");
+    }
 }

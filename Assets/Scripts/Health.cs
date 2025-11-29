@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public event Action OnDeath;
     [SerializeField] protected int maxHealth = 100;
     protected int currentHealth;
     protected bool isAlive = true;
@@ -22,7 +24,7 @@ public class Health : MonoBehaviour
         Debug.Log(name + " health: " + currentHealth);
 
         if (currentHealth <= 0 && isAlive)
-            OnDeath();
+            Death();
     }
 
     public void Heal(int healAmount)
@@ -36,9 +38,10 @@ public class Health : MonoBehaviour
         
     }
 
-    virtual protected void OnDeath()
+    virtual protected void Death()
     {
+        OnDeath?.Invoke();
         Debug.Log(name + " died.");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
