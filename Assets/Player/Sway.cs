@@ -13,7 +13,7 @@ public class Sway : MonoBehaviour
 
     void Update()
     {
-        transform_ = GetComponent<Inventory>().GetCurrent().gameObject.transform;
+        transform_ = GetComponent<Inventory>().GetCurrent()?.gameObject.transform;
         GetInput();
         GetVelocity();
         SwayPosition();
@@ -28,7 +28,7 @@ public class Sway : MonoBehaviour
 
     private void GetVelocity()
     {
-        velocity = GetComponent<PlayerMovement>().get_vel();
+        velocity = GetComponent<MovementController>().getVelocity();
     }
 
     private void SwayPosition()

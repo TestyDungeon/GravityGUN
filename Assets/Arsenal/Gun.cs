@@ -1,10 +1,16 @@
+using System;
 using UnityEngine;
 
-public class Gun : Item
+public class Gun : Item, IAmmoHandler
 {
+    public event Action<int> OnAmmoChanged;
     [SerializeField] private bool allowButtonHold;
     [SerializeField] protected int damage = 20;
+    [SerializeField] protected int maxAmmo = 10;
+    protected int ammo;
+
     [SerializeField] private float timeBetweenShooting = 0.1f;
+    [SerializeField] private int bulletsPerShot = 1;
     protected bool readyToShoot;
     protected bool shooting;
     protected Animator animator = null;
@@ -13,6 +19,7 @@ public class Gun : Item
 
     void Awake()
     {
+        ammo = maxAmmo;
         if (GetComponentInChildren<Animator>())
         {
             animator = GetComponentInChildren<Animator>();
@@ -26,14 +33,15 @@ public class Gun : Item
         weaponRecoil = GetComponent<WeaponRecoil>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         GunInput();
-        if (shooting && readyToShoot)
+        if (shooting && readyToShoot && ammo > 0)
         {
             readyToShoot = false;
-            Shoot();
+            SubstractAmmo(1);
+            for(int i = 0; i < bulletsPerShot; i++)
+                Shoot();
             Invoke("ResetShot", timeBetweenShooting);
             cameraRecoil.ApplyRecoil();
             weaponRecoil.ApplyRecoil();
@@ -57,5 +65,30 @@ public class Gun : Item
     protected virtual void Shoot()
     {
 
+    }
+
+    
+
+    public void AddAmmo(int ammoAmount)
+    {
+        ammo += Mathf.Clamp(ammoAmount, 0, maxAmmo - ammo);
+        AmmoChanged();
+    }
+
+    public void SubstractAmmo(int ammoAmount)
+    {
+        if(ammoAmount == 1)
+            ammo--;   
+        AmmoChanged();
+    }
+
+    public int GetAmmo()
+    {
+        return ammo;
+    }
+
+    public void AmmoChanged()
+    {
+        OnAmmoChanged?.Invoke(ammo);
     }
 }

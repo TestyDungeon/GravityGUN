@@ -8,6 +8,7 @@ public class CameraRecoil : MonoBehaviour
     private Vector3 currentRecoil;
     private Vector3 targetRecoil;
     private Transform transform_;
+    
 
 
     void Update()

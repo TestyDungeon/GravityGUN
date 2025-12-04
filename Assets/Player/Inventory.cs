@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public event Action<Item> OnSlotChanged;
     [SerializeField] private Transform cameraPivot;
     [SerializeField] private Transform mountPoint;
     [SerializeField] private Item[] slots;
@@ -13,6 +15,7 @@ public class Inventory : MonoBehaviour
     {
 
         EquipWeapon(0);
+        OnSlotChanged?.Invoke(slots[currentSlot]);
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].player = gameObject;
@@ -56,6 +59,7 @@ public class Inventory : MonoBehaviour
         slots[slot].OnEquip();
         currentSlot = slot;
         slots[currentSlot].transform.localPosition = pos;
+        OnSlotChanged?.Invoke(slots[currentSlot]);
     }
 
     public Item GetCurrent()

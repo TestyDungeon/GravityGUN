@@ -22,6 +22,7 @@ public class Grapple : Item
 
     private RaycastHit hit;
     private MovementController mc = null;
+    private LayerMask layerMask = ~(1 << 9);
 
     void Awake()
     {
@@ -90,8 +91,9 @@ public class Grapple : Item
     private void StartGrapple()
     {
         Vector3 dir = cameraPivot.forward;
-        if (Physics.Raycast(cameraPivot.position, dir, out hit, range, 1, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(cameraPivot.position, dir, out hit, range, layerMask, QueryTriggerInteraction.Ignore))
         {
+            SoundManager.PlaySound(SoundType.GRAPPLE, 0.6f);
             grapplePoint = hit.point;
             lr.enabled = true;
             grappling = true;
@@ -122,7 +124,7 @@ public class Grapple : Item
         while ((currentEnd - end).sqrMagnitude > 0.25)
         {
             t += Time.deltaTime * animSpeed;
-            Debug.Log("OUT");
+            //Debug.Log("OUT");
             currentEnd += (end - currentEnd).normalized * Time.deltaTime * animSpeed;
             //currentEnd = Vector3.Lerp(currentEnd, end, Time.deltaTime * animSpeed);
             lr.SetPosition(1, currentEnd);

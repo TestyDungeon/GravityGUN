@@ -1,15 +1,11 @@
+using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 
-
-
-public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform playerPivot;
 
     private MovementController movementController;
-
-    
 
     [SerializeField] private float MAX_SPEED = 0.5f;
     [SerializeField] private float accel = 11f;
@@ -20,7 +16,7 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
     [SerializeField] private float stopSpeed = 0.1f;
 
     private Vector3 playerVelocity = Vector3.zero;
-    private Vector3 externalVelocity = Vector3.zero;
+    private bool isPlayingFootsteps = false;
 
     private void Awake()
     {
@@ -36,24 +32,23 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
     private void FixedUpdate()
     {
         playerVelocity = movementController.Move(playerVelocity);
+        if (movementController.GroundCheck() && playerVelocity.sqrMagnitude > 25)
+            StartCoroutine(PlayFootStepsSound());
     }
-
 
     private void AirMove()
     {
-        Vector3 wishdir = new Vector3();
+        Vector3 wishdir;
         Vector3 wishvel = new Vector3();
         float wishspeed;
 
-        Vector3 forward = new Vector3();
-        Vector3 right = new Vector3();
+        Vector3 forward;
+        Vector3 right;
 
         float fmove, smove;
 
         forward = playerPivot.forward;
         right = playerPivot.right;
-
-        //Debug.DrawLine(player_pivot.position, player_pivot.position + player_pivot.forward, Color.black);
 
         fmove = Input.GetAxisRaw("Horizontal");
         smove = Input.GetAxisRaw("Vertical");
@@ -67,8 +62,6 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
         wishdir = wishvel;
         wishspeed = wishdir.magnitude * speed;
         Vector3.Normalize(wishdir);
-
-        //Debug.DrawLine(player_pivot.position, player_pivot.position + wishdir, Color.magenta);
 
         if (wishspeed > MAX_SPEED)
         {
@@ -154,7 +147,6 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
             newspeed = 0;
         newspeed /= speed;
 
-        //Debug.Log("Newspeed: " + newspeed);
         playerVelocity[0] *= newspeed;
         playerVelocity[1] *= newspeed;
         playerVelocity[2] *= newspeed;
@@ -170,39 +162,9 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playerVelocity -= Vector3.Project(playerVelocity, transform.up);
-            append_vel(transform.up * jumpStrength);
-            //Jumped = true;
+            playerVelocity += transform.up * jumpStrength;
+            SoundManager.PlaySound(SoundType.JUMP, 0.4f);
         }
-    }
-
-    //public void OnCustomTriggerEnter(Collider other)
-    //{
-    // 
-    //}
-//
-    //public void OnCustomTriggerStay(Collider other)
-    //{
-//
-    //}
-//
-    //public void OnCustomTriggerExit(Collider other)
-    //{
-    //    
-    //}
-
-    public Vector3 get_vel()
-    {
-        return playerVelocity;
-    }
-
-    public void append_vel(Vector3 v)
-    {
-        if(!float.IsNaN(v.x) && !float.IsNaN(v.y) && !float.IsNaN(v.z))
-            playerVelocity += v;
-    }
-    public void reset_vel()
-    {
-        playerVelocity = Vector3.zero;
     }
 
     private void OnGUI()
@@ -213,5 +175,16 @@ public class PlayerMovement : MonoBehaviour, ICustomTriggerReceiver
         "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups\n" +
         "Velocity: " + ups + "\n" +
         "Grounded: " + movementController.GroundCheck());
+    }
+
+    IEnumerator PlayFootStepsSound()
+    {
+        if (isPlayingFootsteps)
+            yield break;
+            
+        isPlayingFootsteps = true;
+        SoundManager.PlaySound(SoundType.FOOTSTEP, 0.2f);
+        yield return new WaitForSeconds(0.25f);
+        isPlayingFootsteps = false;
     }
 }

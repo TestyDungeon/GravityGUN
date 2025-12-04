@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2189193453666902859}
   - component: {fileID: 7701612224628800501}
   - component: {fileID: 8981192125892495619}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,8 +41,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342564003043267128}
   serializedVersion: 8
-  lengthInSec: 5
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.57
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -4900,7 +4900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1814821476339730450}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4937,7 +4937,7 @@ GameObject:
   - component: {fileID: 235255456568164539}
   - component: {fileID: 1421526021050778069}
   - component: {fileID: 7977743318230139954}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4967,8 +4967,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3070096687658152747}
   serializedVersion: 8
-  lengthInSec: 5
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.57
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -9828,7 +9828,7 @@ GameObject:
   - component: {fileID: 2634690153223378892}
   - component: {fileID: 8715178836255511126}
   - component: {fileID: 2832847068568604535}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9858,8 +9858,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012830514946860463}
   serializedVersion: 8
-  lengthInSec: 5
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.57
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14719,7 +14719,7 @@ GameObject:
   - component: {fileID: 704410899448034685}
   - component: {fileID: 696658678958654240}
   - component: {fileID: 7547411708253471761}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14826,8 +14826,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8227976491911051394}
   serializedVersion: 8
-  lengthInSec: 5
-  simulationSpeed: 1
+  lengthInSec: 0.5
+  simulationSpeed: 2.57
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0

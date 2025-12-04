@@ -3,14 +3,15 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     //private Camera player_camera;
-    [SerializeField] private float rocketSpeed = 1f;
-    [SerializeField] private float explosionRadius = 10;
-    [SerializeField] private float explosionForce = 5;
-    [SerializeField] private GameObject explosionPrefab;
+    [HideInInspector] public int damage;
+    [HideInInspector] public float rocketSpeed = 1f;
+    [HideInInspector] public float explosionRadius = 10;
+    [HideInInspector] public float explosionForce = 5;
+    [HideInInspector] public float explosionForceRB = 5;
+    [HideInInspector] public GameObject explosionPrefab;
+    [HideInInspector] public Transform rocketStart;
     private Vector3 pos; 
     private Vector3 pre_pos;
-    [HideInInspector] public Transform rocketStart;
-    [HideInInspector] public int damage;
 
     int layer_mask;
 
@@ -36,6 +37,7 @@ public class Rocket : MonoBehaviour
             var surrounding_objects = Physics.OverlapSphere(transform.position, explosionRadius, ~0, QueryTriggerInteraction.Ignore);
             GameObject particles = Instantiate(explosionPrefab, transform.position-transform.forward*0.5f, Quaternion.identity);
             Destroy(particles, 2f);
+            SoundManager.PlaySound(SoundType.ROCKETEXPLODE, transform.position, 100f);
             foreach (var obj in surrounding_objects)
             {
                 MovementController mc = obj.GetComponent<MovementController>();
@@ -51,7 +53,7 @@ public class Rocket : MonoBehaviour
                 }
 
                 if (rb != null)
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 3, ForceMode.Impulse);
+                    rb.AddExplosionForce(explosionForceRB, transform.position, explosionRadius, 3, ForceMode.Impulse);
 
             }
             

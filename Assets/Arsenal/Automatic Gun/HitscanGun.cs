@@ -20,8 +20,15 @@ public class HitscanGun : Gun
     {
         
         //animator?.SetTrigger("Shoot");
-        animator.speed = 2;
-        animator.Play("Gun_Shoot");
+       //if(animator != null)
+       //{
+       //    animator.speed = 2;
+       //    animator.Play("Gun_Shoot");
+       //}
+        if(itemName == "shotgun")
+            SoundManager.PlaySound(SoundType.SHOTGUNSHOT, 0.03f);
+        else if(itemName == "smg")
+            SoundManager.PlaySound(SoundType.SMGSHOT, 0.3f);
 
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
@@ -31,9 +38,9 @@ public class HitscanGun : Gun
         Vector3 target = transform.position + direction * distance;
 
         Knockback(-direction);
-
         if (Physics.Raycast(cameraPivot.position, direction, out RaycastHit hit, range, layerMask, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log("Shoot");
             target = hit.point;
             distance = hit.distance;
             if (hit.rigidbody)
@@ -41,9 +48,9 @@ public class HitscanGun : Gun
                 Debug.Log("HIT " + hit.transform.position);
                 hit.rigidbody.AddForceAtPosition(transform.forward * force, hit.point, ForceMode.Impulse);
             }
-            if (hit.transform.gameObject.GetComponent<Health>())
+            if (hit.transform.gameObject.GetComponent<IDamageable>() != null)
             {
-                hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
+                hit.transform.gameObject.GetComponent<IDamageable>().TakeDamage(damage, hit.point, hit.normal);
             }
         }
         SpawnMuzzleFlash();
@@ -54,7 +61,7 @@ public class HitscanGun : Gun
 
     private void Knockback(Vector3 dir)
     {
-        player.GetComponent<PlayerMovement>().append_vel(dir * knockbackForce);
+        player.GetComponent<MovementController>().addVelocity(dir * knockbackForce);
     }
 
     private void SpawnMuzzleFlash()

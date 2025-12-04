@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementController : MonoBehaviour, ICustomTriggerReceiver
+public class MovementController : MonoBehaviour
 {
 
     //private Transform transform;
@@ -110,41 +110,6 @@ public class MovementController : MonoBehaviour, ICustomTriggerReceiver
         vel = totalResolved / Time.fixedDeltaTime;
         return vel;
     }
-
-
-    /*public Vector3 Move(ref Vector3 velocity, ref Vector3 externalVelocity)
-    {
-        //if (GroundCheck())
-        //{
-        //    velocity -= Vector3.Project(velocity, transform.up);
-        //}
-        if (GravityEnabled)
-        {
-            Gravity();
-            GravityOrientation();
-        }
-        ResolvePenetration();
-
-
-        //if (GroundCheck(out RaycastHit hit) && Vector3.Angle(transform.up, hit.normal) <= maxClimbAngle)
-        //{
-        //    velocity = mathlib.ProjectOnPlaneOblique(velocity, hit.normal, transform.up);
-        //}
-
-        velocity += externalVelocity;
-
-        recursionDepth = 0;
-        velocity = CollideAndSlide(transform.position, velocity * Time.fixedDeltaTime, false);
-        recursionDepth = 0;
-        velocity += CollideAndSlide(transform.position + velocity, gravityVelocity * Time.fixedDeltaTime * Time.fixedDeltaTime, true);
-
-        transform.position += velocity;
-        velocity /= Time.fixedDeltaTime;
-
-        externalVelocity = Vector3.zero;
-
-        return velocity;
-    }*/
 
 
 
