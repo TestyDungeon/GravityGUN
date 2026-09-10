@@ -15,12 +15,12 @@ MonoBehaviour:
   MAX_SPEED: 50
   speed: 10
   accel: 9
-  airSpeed: 2
-  airMaxSpeed: 4
-  airAccel: 10
-  airControl: 100
-  friction: 2
-  stopSpeed: 7
+  airSpeed: 5
+  airMaxSpeed: 22
+  airAccel: 7
+  airControl: 0
+  friction: 5
+  stopSpeed: 0.1
   jumpsAmount: 1
   jumpStrength: 10
   dashAmount: 0

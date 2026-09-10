@@ -12,33 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e418edc69801dff46935680310e60aca, type: 3}
   m_Name: Ranged Enemy Config
   m_EditorClassIdentifier: 
-  idleAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 7400000, guid: 05754ea2b555ae74e862d52d29242ff1, type: 2}
-    _NormalizedStartTime: NaN
-  walkAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 7400000, guid: 3a05525e73cea7f4b922a9185120d326, type: 2}
-    _NormalizedStartTime: NaN
-  attackAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 7400000, guid: f27f46aa92ef2ec46aafc3dc940d5ef2, type: 2}
-    _NormalizedStartTime: NaN
   enemyName: Ranged Enemy
   maxHealth: 160
   chaseSpeed: 5
@@ -51,8 +24,8 @@ MonoBehaviour:
   wanderRadius: 10
   damage: 5
   attackRange: 100
-  startAttackRange: 30
-  endAttackRange: 35
+  startAttackRange: 40
+  endAttackRange: 45
   meleeAttackRange: 3
   attackCooldown: 0
   layerMask:
@@ -77,6 +50,3 @@ MonoBehaviour:
   deathSFX:
   - {fileID: 8300000, guid: 93927255ccad83e4e971f796b204ac3a, type: 3}
   staggerMaterial: {fileID: 2100000, guid: eda80e8ba2a7b3b4e865ef9341aef92b, type: 2}
-  references:
-    version: 2
-    RefIds: []

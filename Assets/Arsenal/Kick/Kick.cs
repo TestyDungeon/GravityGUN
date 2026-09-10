@@ -31,13 +31,12 @@ public class Kick : Item, IAmmoHandler
     private bool canParry = false;
     private bool parried = false;
 
-    private CameraRecoil cameraRecoil;
+    
     private Transform transform_;
 
     protected override void Start()
     {
         base.Start();
-        cameraRecoil = player.GetComponentInChildren<CameraRecoil>();
         animator = GetComponentInChildren<Animator>();
         pm = player.GetComponent<PlayerMovement>();
         mc = player.GetComponent<MovementController>();
@@ -152,7 +151,7 @@ public class Kick : Item, IAmmoHandler
     {
         animator.Play("Attack", 0, 0);
         //animator.Play("Kick", 0, 0f);
-        cameraRecoil.ApplyRecoil(recoilAmountCamera, recoilSpeedCamera, returnSpeedCamera);
+        Player.Instance.CameraRecoil.ApplyRecoil(recoilAmountCamera, recoilSpeedCamera, returnSpeedCamera);
         SoundManager.PlaySound(SoundType.AIR_WHOOSH, 1);
         bool groundCheckPreDash;
         

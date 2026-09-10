@@ -35,6 +35,9 @@ public class Sway : MonoBehaviour
 
     private float lastLanded = -1;
 
+    private float landItemTimingOffset = 0;
+    private float landCameraTimingOffset = 0;
+
     public static event Action<Vector3> OnRotationChanged;
     //[SerializeField] List<RectTransform> uiTransforms;
     //[SerializeField] List<RectTransform> hudTransforms;
@@ -114,16 +117,16 @@ public class Sway : MonoBehaviour
         if (horizontalVelocity > 3f && mc.GroundCheck())
         {
             bobTimer = Time.time * bobFrequency;
-            bobPos.y = Mathf.Sin(bobTimer) * bobVerticalAmount;
+            bobPos.y = Mathf.Sin(bobTimer + landItemTimingOffset) * bobVerticalAmount;
             bobPos.x = Mathf.Cos(bobTimer * 0.5f) * bobHorizontalAmount;
 
             cameraBobTimer = Time.time * cameraBobFrequency;
-            cameraBobPos.y = Mathf.Sin(cameraBobTimer) * cameraBobVerticalAmount;
+            cameraBobPos.y = Mathf.Sin(cameraBobTimer + landCameraTimingOffset) * cameraBobVerticalAmount;
         }
         else
         {
             bobTimer = Time.time * bobFrequency / 10;
-            bobPos.y = Mathf.Sin(bobTimer) * bobVerticalAmount  / 5;
+            bobPos.y = Mathf.Sin(bobTimer + landItemTimingOffset) * bobVerticalAmount  / 5;
             bobPos.x = 0; 
 
             //cameraBobTimer = Time.time * cameraBobFrequency / 10;
@@ -137,7 +140,7 @@ public class Sway : MonoBehaviour
     {
         if(transform_ != null)
         {
-            transform_.localPosition = Vector3.Lerp(transform_.localPosition, swayPos+swayCamPos + ((Time.time - lastLanded) > 0.1f ? bobPos : landBobVector * 0.15f), Time.deltaTime * 5);
+            transform_.localPosition = Vector3.Lerp(transform_.localPosition, swayPos+swayCamPos + ((Time.time - lastLanded) > 0.1f ? bobPos : bobPos /*landBobVector * 0.15f*/), Time.deltaTime * 5);
             transform_.localRotation = Quaternion.Lerp(transform_.localRotation, Quaternion.Euler(rot), Time.deltaTime * rotRate);
         }
         
@@ -145,7 +148,7 @@ public class Sway : MonoBehaviour
         
         foreach(Item i in inventory.GetAlwaysOn())
         {
-            i.transform.localPosition = Vector3.Lerp(i.transform.localPosition, swayPos+swayCamPos + ((Time.time - lastLanded) > 0.1f ? bobPos : landBobVector * 0.15f), Time.deltaTime * 10);
+            i.transform.localPosition = Vector3.Lerp(i.transform.localPosition, swayPos+swayCamPos + ((Time.time - lastLanded) > 0.1f ? bobPos : bobPos /*landBobVector * 0.15f*/), Time.deltaTime * 10);
             i.transform.localRotation = Quaternion.Lerp(i.transform.localRotation, Quaternion.Euler(rot), Time.deltaTime * 15);
         }
     }
@@ -161,7 +164,9 @@ public class Sway : MonoBehaviour
 
     public void CameraLandBob(float verticalSpeed)
     {
-        landBobVector = new Vector3(0, -0.5f * Mathf.Clamp01(Mathf.Abs(verticalSpeed) / 10), 0);
+        landCameraTimingOffset = -cameraBobTimer + 135;
+        landItemTimingOffset = -bobTimer + 135;
+        //landBobVector = new Vector3(0, -0.5f * Mathf.Clamp01(Mathf.Abs(verticalSpeed) / 10), 0);
         Debug.Log("Land: " + Mathf.Clamp01(Mathf.Abs(Mathf.Min(verticalSpeed, 0)) / 10));
         lastLanded = Time.time;
     }

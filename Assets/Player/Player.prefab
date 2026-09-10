@@ -793,6 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687309555365192133}
+  - component: {fileID: 2502082437258830939}
   - component: {fileID: 6714727597177701105}
   - component: {fileID: 8189462006408321361}
   - component: {fileID: 3265995627740765662}
@@ -804,6 +805,7 @@ GameObject:
   - component: {fileID: 9077407772370571555}
   - component: {fileID: 3165460910585724561}
   - component: {fileID: 4234285397426348233}
+  - component: {fileID: 3052654153804326123}
   - component: {fileID: 2873647587164012311}
   - component: {fileID: 2349588027815365317}
   - component: {fileID: 8666962516271254885}
@@ -832,6 +834,18 @@ Transform:
   - {fileID: 8855819707322363865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2502082437258830939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072302327177666459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e989e661eb71954a88e91c872d274f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6714727597177701105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,9 +981,9 @@ MonoBehaviour:
   alwaysOnSlots:
   - {fileID: 7373320627539685985}
   - {fileID: 3544580604215825538}
-  maxBulletAmmo: 22
-  maxShellAmmo: 8
-  maxRocketAmmo: 4
+  maxBulletAmmo: 50
+  maxShellAmmo: 20
+  maxRocketAmmo: 10
   maxMeleeAmmo: 1
   upgradePoints: 0
 --- !u!114 &3312628177876981008
@@ -999,6 +1013,7 @@ MonoBehaviour:
   receivers:
   - {fileID: 3165460910585724561}
   - {fileID: 3312628177876981008}
+  - {fileID: 3052654153804326123}
   layermsk:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1024,6 +1039,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7adcd8b357810474ba7e3f560b06075a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3052654153804326123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5072302327177666459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac661dc9de8668428ed4f8bc80fabb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &2873647587164012311
@@ -1454,7 +1481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7560113085733033688}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1472,9 +1499,9 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.21
-  m_Range: 4.962903
-  m_SpotAngle: 30
+  m_Intensity: 0.35
+  m_Range: 2.39
+  m_SpotAngle: 39.98408
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -1590,6 +1617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6720757404879150429}
+  - component: {fileID: 1191072125865134910}
   - component: {fileID: 1861544086572792814}
   - component: {fileID: 2824500233587137905}
   - component: {fileID: 6294861323768229643}
@@ -1615,6 +1643,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4218251603925791753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1191072125865134910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543498162429384504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee59886c7f53a4b86557fa536485bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &1861544086572792814
 Camera:
   m_ObjectHideFlags: 0
@@ -2531,7 +2571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3203451213272398821, guid: 750392c3ba9c0974b98b609d0712f4dc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3594468521936266187, guid: 750392c3ba9c0974b98b609d0712f4dc, type: 3}
       propertyPath: m_LocalPosition.x

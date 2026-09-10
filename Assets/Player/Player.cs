@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public Inventory Inventory { get; private set; }
     public PlayerMovement Movement { get; private set; }
 
+    public CameraRecoil CameraRecoil { get; private set; }
+
     void Awake()
     {
         Instance = this;
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour
         Health = GetComponent<Health>();
         Inventory = GetComponent<Inventory>();
         Movement = GetComponent<PlayerMovement>();
-
+        CameraRecoil = GetComponentInChildren<CameraRecoil>();
         OnPlayerSpawned?.Invoke();
     }
 }

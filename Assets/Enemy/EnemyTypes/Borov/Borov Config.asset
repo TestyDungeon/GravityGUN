@@ -12,33 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e418edc69801dff46935680310e60aca, type: 3}
   m_Name: Borov Config
   m_EditorClassIdentifier: 
-  idleAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: -7361427651036151181, guid: 5f4d08f7b61405d4287a5d339d17cc9b, type: 3}
-    _NormalizedStartTime: NaN
-  walkAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 7400000, guid: 6ae6c197122e8774fbcb3a8cb1894f59, type: 2}
-    _NormalizedStartTime: NaN
-  attackAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: -6464178533435968529, guid: 5f4d08f7b61405d4287a5d339d17cc9b, type: 3}
-    _NormalizedStartTime: NaN
   enemyName: Borov
   maxHealth: 300
   chaseSpeed: 4
@@ -51,8 +24,8 @@ MonoBehaviour:
   wanderRadius: 10
   damage: 5
   attackRange: 100
-  startAttackRange: 30
-  endAttackRange: 35
+  startAttackRange: 40
+  endAttackRange: 45
   meleeAttackRange: 3
   attackCooldown: 0.1
   layerMask:
@@ -77,6 +50,3 @@ MonoBehaviour:
   deathSFX:
   - {fileID: 8300000, guid: 93927255ccad83e4e971f796b204ac3a, type: 3}
   staggerMaterial: {fileID: 2100000, guid: eda80e8ba2a7b3b4e865ef9341aef92b, type: 2}
-  references:
-    version: 2
-    RefIds: []

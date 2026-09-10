@@ -41,6 +41,8 @@ public class PlayerHitResponder : MonoBehaviour, IDamageable
         //        return;
         //    }
         //}
+
+        Player.Instance.CameraRecoil.ApplyRecoil(5, 9, 9);
         SoundManager.PlaySound(SoundType.HURT, 0.3f);
         health.SetHealth(health.GetHealth() - damageAmount);
         health.HealthChanged();

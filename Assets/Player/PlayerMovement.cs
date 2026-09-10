@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         {
             sway.CameraLandBob(lastVerticalSpeed);
             //Debug.Log("Percent " + Mathf.Clamp01(Mathf.Max(playerVelocity.magnitude - 12, 0) / 14));
-            SoundManager.PlaySound(SoundType.LANDING, 0.4f + Mathf.Clamp01(Mathf.Max(playerVelocity.magnitude - 12, 0) / 14) * 0.6f);
+            //SoundManager.PlaySound(SoundType.LANDING, 0.4f + Mathf.Clamp01(Mathf.Max(playerVelocity.magnitude - 12, 0) / 14) * 0.6f);
         }
         MoveInput();
         JumpButton();
@@ -98,12 +98,12 @@ public class PlayerMovement : MonoBehaviour
             Invoke("ResetDash", playerMovementConfig.dashCooldown);
             dashInvokes--;
         }
-        
         AirMove();
+        
         playerVelocity = movementController.Move(playerVelocity);
 
-        if (movementController.GroundCheck() && playerVelocity.sqrMagnitude > 25 && !isPlayingFootsteps)
-            StartCoroutine(PlayFootStepsSound());
+        //if (movementController.GroundCheck() && playerVelocity.sqrMagnitude > 25 && !isPlayingFootsteps)
+        //    StartCoroutine(PlayFootStepsSound());
 
         WindSound();
     }
@@ -177,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity[i] += wishDir[i] * accelSpeed;
     }
 
+/*
     private void AirAccelerate(Vector3 wishDir, float wishSpeed)
     {
         float wishSpd = wishSpeed;
@@ -203,8 +204,7 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = Vector3.Lerp(playerVelocity, wishDir * targetSpeed + (playerVelocity - currentHorizontalVel), playerMovementConfig.airAccel * airControlMultiplier * Time.fixedDeltaTime);
         }
     }
-/*
-
+*/
     private void AirAccelerate(Vector3 wishDir, float wishSpeed)
     {
         float wishSpd = wishSpeed;
@@ -227,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity[i] += wishDir[i] * accelSpeed;
     }
 
-
+/*
     private void AirControl(Vector3 wishDir, float wishSpeed)
     {
         if (wishSpeed <= 0f) return;

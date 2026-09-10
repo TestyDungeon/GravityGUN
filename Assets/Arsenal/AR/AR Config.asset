@@ -30,16 +30,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a34b0062afa97c478daf8ed5a4f6af3, type: 3}
   - {fileID: 8300000, guid: 9d1713923337b8645b44ab08a39cb90a, type: 3}
   caseFallVolume: 0.2
-  shootAnimation:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 0}
-    _NormalizedStartTime: NaN
-  recoilAmountCamera: 4
+  recoilAmountCamera: 2
   recoilSpeedCamera: 14
   returnSpeedCamera: 8
   allowButtonHold: 1
@@ -54,7 +45,7 @@ MonoBehaviour:
   ammoPerShot: 1
   timeBetweenShots: 0
   inputDelay: 0
-  ricochet: 3
+  ricochet: 0
   projectilePrefab: {fileID: 0}
   explosionPrefab: {fileID: 0}
   projectileSpeed: 1
@@ -66,6 +57,3 @@ MonoBehaviour:
   ricoshetSpeedLoss: 0
   mass: 1
   altConfig: {fileID: 11400000, guid: 1e22c29b293bff248abcc040135f03c4, type: 2}
-  references:
-    version: 2
-    RefIds: []
